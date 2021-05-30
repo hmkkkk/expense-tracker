@@ -32,10 +32,12 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ITokenService, TokenService>();
-            services.AddDbContext<DataContext>(options => 
-            {
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
-            });
+            string mySqlConnectionStr = "server=remotemysql.com; port=3306; database=yG36qToFfj; user=yG36qToFfj; password=Efw06TkxRr;";
+            services.AddDbContextPool<DataContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
+            // services.AddDbContext<DataContext>(options => 
+            // {
+            //     options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+            // });
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
