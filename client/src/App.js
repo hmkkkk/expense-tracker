@@ -7,6 +7,7 @@ import { TransactionList } from './components/TransactionList';
 import { TransactionForm } from './components/TransactionForm';
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import  Login  from './components/Login';
+import  {Register}  from './components/Register';
 import useToken from './components/UseToken';
 
 import { GlobalProvider } from './context/GlobalState';
@@ -18,7 +19,20 @@ function App() {
   const user = JSON.parse(localStorage.getItem('token'));
 
   if(!token) {
-    return <Login setToken={setToken} />
+    return <>
+    
+    <Router>
+      <h1>Expense Tracker </h1>
+      <br/><br/>
+      <Route path="/register">
+        <Register  setToken={setToken} />
+      </Route >
+      <Route path="/" exact render={(props) => (
+        <Login  setToken={setToken} />
+      )}/>
+    </Router>
+    </>
+
   }
  
   return (

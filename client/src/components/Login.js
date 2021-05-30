@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-async function loginUser(credentials) {
-    return fetch('https://localhost:5001/api/Account/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    })
-      .then(data => data.json())
-   }
+
+
 
 export default function Login({ setToken }) {
     const [username, setUserName] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState();
+  const history = useHistory();
+
+  async function loginUser(credentials) {
+    return fetch('/api/Account/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => {
+      if (data.status !== 200) { setError("nieprawidłowe dane logowania");}
+      else {return data.json()}
+    })
+ }
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -22,7 +32,8 @@ export default function Login({ setToken }) {
       username,
       password
     });
-    setToken(token);
+      setToken(token);
+      history.push("/")
   }
 
   return(
@@ -45,6 +56,8 @@ export default function Login({ setToken }) {
                 <button className="btn" type="submit">Zaloguj się</button>
             </div>
         </form>
+        <h5>Nie masz konta? <Link to="/register">Zarejestuj się</Link> </h5>
+        {error && <p className="errorp">{error}</p>}
     </div>
   )
 }

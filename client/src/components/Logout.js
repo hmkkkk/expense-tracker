@@ -1,6 +1,8 @@
 import React from 'react'
 
+
 function Logout() {
+    
     function logOff() {
         localStorage.removeItem('token');
         window.location.reload();

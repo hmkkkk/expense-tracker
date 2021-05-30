@@ -26,11 +26,11 @@ export const TransactionForm = () => {
             <h3>Dodaj nową transakcję</h3>
                 <form onSubmit={onSubmit}>
                     <div className="form-control">
-                    <label htmlFor="text">Nazwa</label>
+                    <label className="transactionLabel" htmlFor="text">Nazwa</label>
                     <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Wprowadź nazwę" />
                     </div>
                     <div className="form-control">
-                    <label htmlFor="amount"
+                    <label className="transactionLabel" htmlFor="amount"
                         >Kwota <br />
                         (Jeśli chcesz dodać wydatek, przed kwotą wprowadź minusa " - ")</label
                     >
