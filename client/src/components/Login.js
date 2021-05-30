@@ -20,10 +20,7 @@ export default function Login({ setToken }) {
     },
     body: JSON.stringify(credentials)
   })
-    .then(data => {
-      if (data.status !== 200) { setError("nieprawidłowe dane logowania");}
-      else {return data.json()}
-    })
+    .then(data => data.json())
  }
 
   const handleSubmit = async e => {
