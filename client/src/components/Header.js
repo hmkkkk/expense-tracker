@@ -1,9 +1,15 @@
 import React from 'react'
+import Logout from './Logout';
 
-export const Header = () => {
+export const Header = ({username}) => {
     return (
+        <>
         <h2>
-            Expense Tracker
+            Witaj {username}!
         </h2>
+        <h5>
+            Nie jesteś {username}? <Logout />
+        </h5>
+        </>
     )
 }

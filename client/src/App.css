@@ -39,6 +39,10 @@ h4 {
   margin: 0;
   text-transform: uppercase;
 }
+h5 {
+  margin: 0;
+  
+}
 
 .inc-exp-container {
   background-color: #fff;
@@ -78,7 +82,8 @@ label {
 }
 
 input[type='text'],
-input[type='number'] {
+input[type='number'],
+input[type='password'] {
   border: 1px solid #dedede;
   border-radius: 2px;
   display: block;
@@ -148,4 +153,17 @@ input[type='number'] {
 
 .list li:hover .delete-btn {
   opacity: 1;
+}
+
+.logoutButton {
+  background: none!important;
+  border: none;
+  padding: 0;
+  padding-left: 10px;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: none;
+  cursor: pointer;
 }

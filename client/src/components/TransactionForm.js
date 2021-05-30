@@ -7,11 +7,13 @@ export const TransactionForm = () => {
 
     const { addTransaction } = useContext(GlobalContext);
 
+    const user = JSON.parse(localStorage.getItem('token'));
+
     const onSubmit = e => {
         e.preventDefault();
 
         const newTransaction = {
-            id: Math.floor(Math.random() * 100000000000000000000000000),
+            userId: +user.id,
             text,
             amount: +amount
         }
