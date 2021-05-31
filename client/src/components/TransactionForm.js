@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { GlobalContext } from '../context/GlobalState'
 
+
 export const TransactionForm = () => {
     const [text, setText] = useState('');
     const [amount, setAmount] = useState(0);
@@ -27,14 +28,14 @@ export const TransactionForm = () => {
                 <form onSubmit={onSubmit}>
                     <div className="form-control">
                     <label className="transactionLabel" htmlFor="text">Nazwa</label>
-                    <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Wprowadź nazwę" />
+                    <input required type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Wprowadź nazwę" />
                     </div>
                     <div className="form-control">
                     <label className="transactionLabel" htmlFor="amount"
                         >Kwota <br />
                         (Jeśli chcesz dodać wydatek, przed kwotą wprowadź minusa " - ")</label
                     >
-                    <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Wprowadź kwotę" />
+                    <input required type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Wprowadź kwotę" />
                     </div>
                     <button className="btn">Dodaj transakcję</button>
                 </form>

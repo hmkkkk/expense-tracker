@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import * as ReactBootStrap from 'react-bootstrap';
 
 
 
@@ -10,9 +11,12 @@ export default function Login({ setToken }) {
     const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
+  
 
   async function loginUser(credentials) {
+    
     return fetch('/api/Account/login', {
     method: 'POST',
     headers: {
@@ -20,20 +24,25 @@ export default function Login({ setToken }) {
     },
     body: JSON.stringify(credentials)
   })
+  
     .then(data => {
       console.log(data);
       if (data.status !== 200) { setError("nieprawidłowe dane logowania");}
       else {return data.json()}
     })
+    
  }
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setLoading(true);
     const token = await loginUser({
       username,
       password
     });
+    
       setToken(token);
+      setLoading(false);
       history.push("/")
   }
 
@@ -54,11 +63,13 @@ export default function Login({ setToken }) {
                 <input type="password" onChange={e => setPassword(e.target.value)} />
             </div>
             <div>
-                <button className="btn" type="submit">Zaloguj się</button>
+                <button disabled={loading} className="btn" type="submit">Zaloguj się</button>
+                
             </div>
         </form>
         <h5>Nie masz konta? <Link to="/register">Zarejestuj się</Link> </h5>
-        {error && <p className="errorp">{error}</p>}
+        {error && <p className="errorp">{error}</p>} <br />
+        {loading && <div className="center" ><ReactBootStrap.Spinner animation="grow" variant="info" /></div>}
     </div>
   )
 }

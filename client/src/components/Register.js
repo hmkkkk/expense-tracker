@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import * as ReactBootStrap from 'react-bootstrap';
 
 export const Register = ({setToken}) => {
     const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   async function registerUser(credentials) {
@@ -28,17 +30,21 @@ export const Register = ({setToken}) => {
     var FormOk = true;
 
     e.preventDefault();
+    setLoading(true)
     if (username.length < 4 || username.length > 20) {
         setError("Nazwa powinna mieć od 4 do 20 znaków")
         FormOk = false;
+
     }
     if (password.length < 4 || password.length > 20) {
         setError("Hasło powinno mieć od 4 do 20 znaków")
         FormOk = false;
+
     }
     if (password !== confirmPassword) {
         setError("Hasła muszą być takie same")
         FormOk = false;
+
     }
     if(FormOk === true)
     {
@@ -46,8 +52,10 @@ export const Register = ({setToken}) => {
             username,
             password
           });
+          setLoading(false)
             setToken(token);
     }
+    
   }
 
     return (
@@ -81,6 +89,7 @@ export const Register = ({setToken}) => {
         <h5>Masz już konto? <Link to="/">Zaloguj się</Link> </h5>
     </div>
     {error && <p className="errorp">{error}</p>}
+    {loading && <div className="center" ><ReactBootStrap.Spinner animation="grow" variant="info" /></div>}
     </>
     )
 }
