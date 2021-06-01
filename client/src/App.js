@@ -22,7 +22,7 @@ function App() {
     return <>
     
     <Router>
-      <h1>Expense Tracker </h1>
+      <h1>Notatnik wydatków</h1>
       <br/><br/>
       <Route path="/register">
         <Register  setToken={setToken} />

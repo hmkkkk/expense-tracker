@@ -35,7 +35,7 @@ export const TransactionForm = () => {
                         >Kwota <br />
                         (Jeśli chcesz dodać wydatek, przed kwotą wprowadź minusa " - ")</label
                     >
-                    <input required type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Wprowadź kwotę" />
+                    <input className="moneyInput" required type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Wprowadź kwotę" />
                     </div>
                     <button className="btn">Dodaj transakcję</button>
                 </form>

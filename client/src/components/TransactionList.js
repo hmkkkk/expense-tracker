@@ -64,13 +64,15 @@ export const TransactionList = () => {
       ];
 
       // set value for default selection
-  const [selectedValue, setSelectedValue] = useState(month);
+  const [selectedMonth, setSelectedMonth] = useState(month);
+  const [selectedYear, setSelectedYear] = useState(year);
  
   // handle onChange event of the dropdown
-  const handleChange = e => {
-    setDbLoading(false)
-    setSelectedValue(e.value);
-    getTransactions(user.username, e.value, year)
+
+  const filterChanges = e => {
+      e.preventDefault()
+      setDbLoading(false)
+      getTransactions(user.username, selectedMonth, selectedYear)
   }
 
     useEffect(() => {
@@ -82,13 +84,22 @@ export const TransactionList = () => {
     return (
         <>
          <h3>Historia</h3>
+         <div className="wrapper">
          <Select
-         className="test"
+         className="test ml-1"
         placeholder="Select Option"
-        value={data.find(obj => obj.value === selectedValue)} // set selected value
+        value={data.find(obj => obj.value === selectedMonth)} // set selected value
         options={data} // set list of the data
-        onChange={handleChange} // assign onChange function
+        onChange={(e)=>{setSelectedMonth(e.value)}} // assign onChange function
       />
+      <input className="yearInput test" 
+      type="number"
+      value={selectedYear} 
+      onChange={(e)=>{setSelectedYear(e.target.value)}} placeholder="Wprowadź kwotę" />
+         </div>
+         
+      <button onClick={filterChanges} className="btn">Filtruj</button>
+      
       
          {dbLoading ? 
          <ul className="list">
