@@ -20,10 +20,11 @@ namespace API.Controllers
         }
 
         [HttpGet("{username}")]
-        public async Task<IEnumerable<Expense>> GetExpenses(string username)
+        public async Task<IEnumerable<Expense>> GetExpenses(string username, int month, int year)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
             var expenses = await _context.Expenses.Where(u => u.UserId == user.Id).ToListAsync();
+            expenses = expenses.Where(e => e.Date.Month == month && e.Date.Year == year).ToList();
 
             return expenses;
         }

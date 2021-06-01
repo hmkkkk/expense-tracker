@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
@@ -8,5 +9,6 @@ namespace API.Entities
         public int UserId { get; set; }
         public string Text { get; set; }
         public double Amount { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }

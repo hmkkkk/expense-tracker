@@ -15,15 +15,18 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
     const [loading, setLoading] = useState(null);
+    const [dbLoading, setDbLoading] = useState(null);
 
     // Actions
-    async function getTransactions(username) {
+    async function getTransactions(username, month, year) {
+        
         try {
-            const res = await axios.get(`/api/Expense/${username}`);
-            setLoading(true);
+            const res = await axios.get(`/api/Expense/${username}?month=${month}&year=${year}`);
+            setDbLoading(true);
             dispatch({
                 type: 'GET_TRANSACTIONS',
-                payload: res.data
+                payload: res.data,
+                
             });
         } catch (err) {
             dispatch({
@@ -75,6 +78,8 @@ export const GlobalProvider = ({ children }) => {
         transactions: state.transactions,
         error: state.error,
         loading,
+        dbLoading,
+        setDbLoading,
         getTransactions,
         deleteTransaction,
         addTransaction

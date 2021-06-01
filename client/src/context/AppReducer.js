@@ -1,3 +1,7 @@
+const initialState = {
+    transactions: [],
+    error: null,
+}
 export default (state, action) => {
     switch(action.type) {
         case 'GET_TRANSACTIONS':
@@ -24,6 +28,7 @@ export default (state, action) => {
                     ...state,
                     error: action.payload
                 }
+            
         default:
             return state;
     }

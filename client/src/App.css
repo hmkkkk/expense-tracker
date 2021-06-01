@@ -220,6 +220,9 @@ input[type='password'] {
   justify-content: center;
   align-items: center;
 }
+.test {
+  width: 50%;
+}
 
 .spinner-grow-sm {
   width: 1rem;
