@@ -32,7 +32,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ITokenService, TokenService>();
-            string mySqlConnectionStr = _config.GetConnectionString("DefaultConnection");
+            string mySqlConnectionStr = _config["ConnectionString"];
             services.AddDbContextPool<DataContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
             services.AddControllers();
             services.AddCors();
